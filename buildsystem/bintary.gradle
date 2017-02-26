@@ -80,6 +80,7 @@ task javadoc(type: Javadoc) {
         encoding = "utf-8"
         docEncoding = "utf-8"
         charSet = "utf-8"
+        failOnError = false
     }
     exclude '**/BuildConfig.java'
     exclude '**/R.java'

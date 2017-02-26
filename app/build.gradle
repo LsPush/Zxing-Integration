@@ -28,6 +28,7 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:25.2.0'
+    compile("com.android.support:appcompat-v7:${SUPPORT_VERSION}")
     compile project(':zxing-integration')
+    //compile('com.github.LsPush:Zxing-Integration:fd0c384cd0')
 }
