@@ -1,0 +1,33 @@
+apply plugin: 'com.android.library'
+apply from: rootProject.file('buildsystem/module.gradle')
+
+android {
+    compileSdkVersion COMPILE_SDK_VERSION as int
+    buildToolsVersion BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        minSdkVersion MIN_SDK_VERSION as int
+        targetSdkVersion TARGET_SDK_VERSION as int
+
+        def versionMajor = VERSION_MAJOR as int
+        def versionMinor = VERSION_MINOR as int
+        def versionPatch = VERSION_PATCH as int
+
+        versionCode versionMajor * 10000 + versionMinor * 100 + versionPatch
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile("com.android.support:support-fragment:${SUPPORT_VERSION}")
+    compile('com.google.zxing:core:3.3.0')
+}
+
+apply from: rootProject.file('buildsystem/bintary.gradle')

@@ -1,0 +1,32 @@
+apply from: 'buildsystem/metadata.gradle'
+apply plugin: 'com.github.ben-manes.versions'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.3'
+        // result in ${buildDir}/outputs/dexcount/${variant}
+        classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.2"
+        // run help->dependencyUpdates to see new available version
+        classpath "com.github.ben-manes:gradle-versions-plugin:0.14.0"
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+ext {
+    isCI = System.getenv("CI") as boolean
+    bintaryUpload = !isCI
+}
